@@ -4,7 +4,7 @@
 
 A reference implementation of the server behind Apple's new real-time **Retention Messaging API**: a deadline-budgeted decision engine, notification-fed feature store, intent-to-treat holdout, an offline Claude copy pipeline with a deterministic App Review gate, and the attribution that tells you whether any of it worked. Swift 6 (strict concurrency), no dependencies, Linux and Apple platforms.
 
-> **Demo app:** (added after the companion repo is pushed — see below)
+> **Demo app:** [retention-decision-demo-app](https://github.com/rajatslakhina/retention-decision-demo-app) — an iOS app that runs this engine, the copy pipeline and the attribution in-process, consuming the kit as a remote package at v1.0.0.
 
 ---
 
@@ -188,9 +188,9 @@ What was run for this release, exactly:
 | `swift test -Xswiftc -warnings-as-errors` | macOS, Xcode 27.2 / Swift 6.4.2 | ✅ 141 tests, 0 failures |
 | `xcodebuild build -scheme RetentionDecisionKit-Package` for `generic/platform=iOS Simulator` (all four products, including the SwiftUI lab and the StoreKit 2 mapping) | Xcode 27.2 | ✅ |
 | `scripts/mutation-check.sh` | Linux x86_64, Swift 6.0.3 | ✅ 29 of 29 mutants caught, each by its named test; the control survived |
-| Demo app on a Simulator | iOS 27.2 Simulator, iPhone 18 Pro | ✅ launched and screenshotted headlessly (`xcodebuild` + `simctl`, launch arguments, no taps), built against a local checkout of this kit — see the [demo repo](https://github.com/rajatslakhina/retention-decision-demo-app#verification) |
+| Demo app on a Simulator | iOS 27.2 Simulator, iPhone 18 Pro | ✅ launched and screenshotted headlessly (`xcodebuild` + `simctl`, launch arguments, no taps) against a local checkout of this kit, then run again exactly as checked in with this kit resolved from GitHub at v1.0.0 — see the [demo repo](https://github.com/rajatslakhina/retention-decision-demo-app#verification) |
 
-**CI** runs three jobs on pushes to `main`, on `v*` tags, on pull requests and on manual dispatch: Linux (`swift:6.0` container: build with warnings as errors, test), Apple (`macos-15`: build with warnings as errors, test, iOS Simulator build of every product) and the mutation check. CI had not run when this README was written — the repository was not public yet; see the [Actions tab](../../actions) for its history.
+**CI** runs three jobs on pushes to `main`, on `v*` tags, on pull requests and on manual dispatch: Linux (`swift:6.0` container: build with warnings as errors, test), Apple (`macos-15`: build with warnings as errors, test, iOS Simulator build of every product) and the mutation check. The first runs, for `main` and for the `v1.0.0` tag, were green: Linux (Swift 6.0.3) 141 tests, 0 failures; macOS 15 (Xcode 16.4, Swift 6.1.2) 141 tests, 0 failures, plus the iOS Simulator build; mutation check 29 caught, 0 problems, control survived. See the [Actions tab](../../actions) for later runs.
 
 ## License
 
